@@ -6,6 +6,7 @@ public class FollowBehaviour : StateMachineBehaviour
 {
     Transform playerTransform;
     public float speed = 4f;
+    int distanceHash = Animator.StringToHash("playerDistance");
 
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -22,6 +23,9 @@ public class FollowBehaviour : StateMachineBehaviour
         Vector2 target = playerTransform.position;
 
         animator.transform.position = Vector2.MoveTowards(current, target, speed * Time.deltaTime);
+
+        animator.SetFloat(distanceHash, Vector2.Distance(current, target));
+
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
